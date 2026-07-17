@@ -1,0 +1,78 @@
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* due colonne */
+    grid-template-rows: auto 1fr;     /* titolo + area di gioco */
+    gap: 20px;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.title {
+    grid-column: 1 / -1;   /* il titolo occupa tutta la larghezza */
+    grid-row: 1;
+    text-align: center;
+}
+
+.player1-area {
+    grid-column: 1;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: auto 1fr;  /* dati sopra, gameboard sotto */
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.player2-area {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.player1-data,
+.player2-data {
+    justify-content: center;
+    /* es. altezza fissa per punteggio/status */
+}
+
+.player1-gameboard,
+.player2-gameboard {
+    /* qui dentro poi metterai la griglia 10x10 delle celle */
+    aspect-ratio: 1 / 1;   /* mantiene la board quadrata */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    justify-content: center;
+}
+
+.square-container {
+    background-color: lightgray;
+    border: 1px dashed #555555;
+    justify-content: center;
+}
+
+.ship{
+    aspect-ratio: 1 / 1;   /* mantiene la board quadrata */
+    background-color: chartreuse;
+    border: 1px solid green;
+    justify-content: center;
+}
+
+.ship-sunk{
+    aspect-ratio: 1 / 1;   /* mantiene la board quadrata */
+    background-color: darkred;
+    border: 1px solid red;
+    justify-content: center;
+}
+
+.missed-shot{
+    aspect-ratio: 1 / 1;   /* mantiene la board quadrata */
+    background-color: #555555;
+    border: 1px solid #7f7f7f;
+    justify-content: center;
+}

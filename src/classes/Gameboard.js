@@ -10,8 +10,8 @@ export class Gameboard {
   isShipPlaceable(ship, x, y) {
     const L = this.cells[0].length;
     const H = this.cells.length;
-    let l = 0;
-    let h = 0;
+    let l;
+    let h;
     if (ship.direction === 0) {
       l = ship.length;
       h = 1;
@@ -78,6 +78,7 @@ export class Gameboard {
   }
 
   placeShip(ship, x, y) {
+    console.log("placing ship");
     if (this.isShipPlaceable(ship, x, y)) {
       if (ship.direction === 0) {
         // ship horizontal
@@ -91,6 +92,9 @@ export class Gameboard {
         }
       }
       this.ships.push(ship);
+      console.log("Ship placed");
+    } else{
+      console.log("Ship not placeable");
     }
   }
 
@@ -99,7 +103,7 @@ export class Gameboard {
           this.cells[y][x] = -1;
           return true;
       }
-      else if(this.cells[y][x] != -1){
+      else if(this.cells[y][x] !== -1){
           // E' una nave
           this.cells[y][x].hitShip();
           return true;
