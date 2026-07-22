@@ -12,12 +12,14 @@ export class Ship {
   }
 
   hitShip() {
+    console.log('SHIP HIT');
     this.hit++;
     this.isSunk();
   }
 
   isSunk() {
     if (this.hit >= this.length) {
+      console.log('SHIP SUNK')
       this.sunk = true;
     }
   }

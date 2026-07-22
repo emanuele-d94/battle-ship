@@ -1,4 +1,9 @@
 import './style.css';
 import {game} from "./classes/GameEngine";
 
-game();
+let gameState = {
+    currentTurn : '',
+    isGameOver : false
+}
+
+game(gameState);

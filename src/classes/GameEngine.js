@@ -3,17 +3,15 @@ import {Gameboard} from "./Gameboard";
 import {Player} from "./Player";
 import {renderInterface} from "../components/GameInterface";
 
-export function game(){
-
+export function game(gameState){
     let players = setup();
     renderInterface(players.player1, players.player2);
-
 }
 
 function setup(){
     console.log("Game started!");
 
-    let player2Gameboard = new Gameboard(100)
+    let player2Gameboard = new Gameboard(10)
     let player2 = new Player("computer",player2Gameboard);
     // Metto le navi nella board del computer in modo fisso
     // Direction: 0 horizontal 1 vertical
@@ -31,7 +29,7 @@ function setup(){
 
     console.log('Player2 cells: ',player2.gameboard.cells)
 
-    let player1Gameboard = new Gameboard(100)
+    let player1Gameboard = new Gameboard(10)
     let player1 = new Player("user",player1Gameboard);
 
     let player1_ship_1 = new Ship(1,0)  // 1x1 horizontal
@@ -51,5 +49,3 @@ function setup(){
 
     return {'player1':player1,'player2':player2}
 }
-
-

@@ -1,6 +1,7 @@
 import { Gameboard } from '../classes/Gameboard';
 import { Ship } from '../classes/Ship';
 import { expect, test } from '@jest/globals';
+import {game} from "../classes/GameEngine";
 
 //Test generalizzato
 test('Gameboard isShipPlaceable 5x1', () => {
@@ -123,7 +124,7 @@ test('Gameboard isShipPlaceable 1x5 with 1x1 in (0,0)', () => {
 
   // Se c'è una nave 1x1 nella riga sopra:
   const ship1 = new Ship(1, 0);
-  gameboard.cells[0][0] = ship1;
+  gameboard.placeShip(ship,0,0)
   expect(gameboard.isShipPlaceable(ship, 0, 0)).toBe(false);
   expect(gameboard.isShipPlaceable(ship, 1, 0)).toBe(false);
   expect(gameboard.isShipPlaceable(ship, 2, 0)).toBe(true);
@@ -214,7 +215,8 @@ test('gameOver', () => {
     const ship2 = new Ship(3, 1); // Nave verticale di lunghezza 3
 
     gameboard.placeShip(ship1, 5, 5); // Occupa [5][5], [6][5], [7][5], [8][5], [9][5]
-    gameboard.placeShip(ship2, 9, 6); // Occupa [9][6], [9][7], [9][8]
+    expect(gameboard.isShipPlaceable(ship2, 9,7)).toBe(true);
+    gameboard.placeShip(ship2, 9, 7); // Occupa [9][7], [9][8], [9][9]
 
     // Affondiamo nave1
     gameboard.receiveAttack(5, 5);
@@ -231,10 +233,27 @@ test('gameOver', () => {
     expect(gameboard.gameOver()).toBe(false)
 
     // Affondiamo nave2
-    gameboard.receiveAttack(9,6);
     gameboard.receiveAttack(9,7);
     gameboard.receiveAttack(9,8);
+    gameboard.receiveAttack(9,9);
 
     // Game Over:
     expect(gameboard.gameOver()).toBe(true)
+});
+
+test('Ship Placement T', () => {
+    const gameboard = new Gameboard(10);
+    const ship1 = new Ship(5, 0); // Nave orizzontale di lunghezza 5
+    const ship2 = new Ship(3, 1); // Nave verticale di lunghezza 3
+
+    gameboard.placeShip(ship1, 0, 0); // Occupa [0][0], [1][0], [2][0], [3][0], [4][0]
+    expect(gameboard.isShipPlaceable(ship2, 0, 1)).toBe(false);
+    expect(gameboard.isShipPlaceable(ship2, 1, 1)).toBe(false); // Occupa [1][1], [1][2], [1][3]
+    expect(gameboard.isShipPlaceable(ship2, 2, 1)).toBe(false);
+    expect(gameboard.isShipPlaceable(ship2, 3, 1)).toBe(false);
+    expect(gameboard.isShipPlaceable(ship2, 4, 1)).toBe(false);
+    expect(gameboard.isShipPlaceable(ship2, 5, 1)).toBe(false);
+    expect(gameboard.isShipPlaceable(ship2, 6, 1)).toBe(true);
+
+
 });

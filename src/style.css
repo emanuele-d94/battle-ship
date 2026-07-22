@@ -51,12 +51,14 @@
 }
 
 .square-container {
+    cursor: pointer;
     background-color: lightgray;
     border: 1px dashed #555555;
     justify-content: center;
 }
 
 .ship{
+    cursor: pointer;
     aspect-ratio: 1 / 1;   /* mantiene la board quadrata */
     background-color: chartreuse;
     border: 1px solid green;
